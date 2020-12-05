@@ -43,6 +43,8 @@ def login():
     # Forget any user_id
     session.clear()
 
+    db = SQL("sqlite:///passwordmanager.db")
+
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
@@ -73,13 +75,26 @@ def login():
         return render_template("login.html")
 
 
-@app.route("/")
-def home():
-    return render_template("index.html")
+@app.route("/", methods=["GET", "POST"])
+@login_required
+def index():
 
+    db = SQL("sqlite:///passwordmanager.db")
+
+    if request.method == "GET":
+        return render_template("index.html")
+
+    else:
+        # Take care of the new entry
+        name = request.form.get("name")
+        link = request.form.get("link")
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        db.execute
+
+    
 # Register user
-
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
@@ -108,6 +123,17 @@ def register():
             db.execute("INSERT INTO users (username, hash) VALUES (:username, :pHash)",
                        username=username, pHash=pHash)
             return redirect("/login")
+
+
+@app.route("/logout")
+def logout():
+    """Log user out"""
+
+    # Forget any user_id
+    session.clear()
+
+    # Redirect user to login form
+    return redirect("/")
 
 
 def errorhandler(e):
