@@ -1,5 +1,8 @@
 {% extends "base.html" %} {% block title %} Index {% endblock %} {% block main
 %} {{ i }}
+<script>
+  const clmT = "{{ dataR }}";
+</script>
 
 <h1>List of entries</h1>
 <div>
@@ -10,13 +13,12 @@
       <th>Username</th>
       <th>Password</th>
     </tr>
-
     {% for i in dataFromFlask %}
     <tr>
       <td>{{ i['name'] }}</td>
-      <td>{{ i['link'] }}</td>
-      <td>{{ i['username'] }}</td>
-      <td>********</td>
+      <td> <a target="_blank" href="{{ i['link'] }}">{{ i['link'] }}</a></td>
+      <td id="username">{{ i['username'] }}</td> 
+      <td id="password">********<button  onclick="revealPass()">Show</button> </td> 
     </tr>
     {% endfor %}
   </table>
@@ -55,4 +57,8 @@
   />
   <input id="submit" type="submit" value="Submit" />
 </form>
+<button id="generator">Generate Password</button>
+
+<script src="{{ url_for('static', filename='js/crypt.js') }}"></script>
+<script src="{{ url_for('static', filename='js/passgen.js') }}"></script>
 {% endblock %}

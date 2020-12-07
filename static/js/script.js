@@ -4,6 +4,20 @@ const formElem = document.querySelector("#formElem");
 // Select table
 const table = document.querySelector("#list-entries");
 
+// Select the button that generates a random password
+const genButton = document.querySelector("#generator");
+
+// Select the passwrod field
+const passField = document.querySelector("#password");
+
+function revealPass() {
+  const copyText = document.querySelector("#username");
+  copyText.querySelector();
+  copyText.setSelectionRange(0, 999999); //For mobile
+  document.execCommand("copy");
+  alert("Copied the text: " + copyText.value);
+}
+
 //If we are on the index page where #formElem is.
 if (formElem) {
   //When the new entry is submited
@@ -36,17 +50,22 @@ if (formElem) {
       document.querySelector("#username").value = "";
       document.querySelector("#password").value = "";
 
-     //Add the new entry in the view.
+      //Add the new entry in the view.
       table.innerHTML += updateTable(name, link, username);
-      
-      
     }
   };
 }
 
+//Listen to the generate button and generate password when clicked.
+if (genButton) {
+  genButton.addEventListener("click", function () {
+    let password = generatePass(18);
+    passField.value = password;
+  });
+}
+
 //Create a new <tr> in the table.
 function updateTable(name, link, username) {
-  
   return `
       <tr>
         <td>${name}</td>
@@ -56,32 +75,12 @@ function updateTable(name, link, username) {
       </tr>
     `;
 }
-//Encryption key
-const secret = "716238912387121sdads683";
+// Encrypt user's password and store it in a variable to be user later on.
 
-let crypt = {
-  secret,
-  encrypt: function (clear) {
-    // encrypt() : encrypt the given clear text
+// // TEST - ENCRYPT
+// let cipher = crypt.encrypt("FOO BAR");
+// // console.log(cipher);
 
-    let cipher = CryptoJS.AES.encrypt(clear, crypt.secret);
-    cipher = cipher.toString();
-    return cipher;
-  },
-
-  decrypt: function (cipher) {
-    // decrypt() : decrypt the given cipher text
-
-    let decipher = CryptoJS.AES.decrypt(cipher, crypt.secret);
-    decipher = decipher.toString(CryptoJS.enc.Utf8);
-    return decipher;
-  },
-};
-
-// TEST - ENCRYPT
-let cipher = crypt.encrypt("FOO BAR");
-console.log(cipher);
-
-// TEST - DECRYPT
-let decipher = crypt.decrypt(cipher);
-console.log(decipher);
+// // TEST - DECRYPT
+// let decipher = crypt.decrypt(cipher);
+// // console.log(decipher);
