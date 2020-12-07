@@ -6,6 +6,7 @@ from jinja2 import Template
 from helpers import apology, login_required
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
+import json
 
 
 app = Flask(__name__)
@@ -80,20 +81,30 @@ def login():
 def index():
 
     db = SQL("sqlite:///passwordmanager.db")
+    user_id = session["user_id"]
 
     if request.method == "GET":
-        return render_template("index.html")
+        data = db.execute("SELECT * FROM data WHERE id=:id", id=user_id)
+        data_json = data
+        return render_template("index.html", dataFromFlask=data_json)
 
     else:
         # Take care of the new entry
-        name = request.form.get("name")
-        link = request.form.get("link")
-        username = request.form.get("username")
-        password = request.form.get("password")
+        name = request.form['name']
+        link = request.form['link']
+        username = request.form['username']
+        password = request.form['password']
 
-        db.execute
+        print(name, link, username, password)
+        db.execute("INSERT INTO data (id, name, link, username, hash) VALUES (:id, :name, :link, :username, :hash)",
+                   id=user_id, name=name, link=link, username=username, hash=password)
+        data = db.execute("SELECT * FROM data WHERE id=:id", id=user_id)
+        data_json = json.dumps(data)
+        print(data_json)
 
-    
+        return data_json
+
+
 # Register user
 @app.route("/register", methods=["GET", "POST"])
 def register():
