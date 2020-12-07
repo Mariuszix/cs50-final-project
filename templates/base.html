@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{% endblock %}</title>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> -->
   </head>
   <body>
     <header>
@@ -13,17 +15,8 @@
     {% block main %} {% endblock%}
 
     <footer></footer>
-    <!-- These two libraries are highly recommended for encoding password/salt -->
-    <script src="libs/buffer.js" type="text/javascript"></script>
-
-    <!-- This shim library greatly improves performance of the scrypt algorithm -->
-    <script src="libs/setImmediate.js" type="text/javascript"></script>
-    <script
-      src="https://raw.githubusercontent.com/ricmoo/scrypt-js/master/scrypt.js"
-      type="text/javascript"
-    ></script>
-    <script src="app.js"></script>
-    <script src="jsaes.js"></script>
-    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
   </body>
 </html>

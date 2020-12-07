@@ -1,17 +1,58 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block title %} Index {% endblock %} {% block main
+%} {{ i }}
 
-{% block title %}
-    Index
-{% endblock %}
+<h1>List of entries</h1>
+<div>
+  <table id="list-entries">
+    <tr>
+      <th>Name</th>
+      <th>Link</th>
+      <th>Username</th>
+      <th>Password</th>
+    </tr>
 
-{% block main %}
-   <h1>Add new entry:</h1>
-   <form action="/" method="post">
-    <h1>Register</h1>
-    <input autocomplete="off" type="text" name="Nane" placeholder="Name" />
-    <input autocomplete="off" type="text" name="link" placeholder="link" />
-    <input autocomplete="off" type="text" name="username" placeholder="Username" />
-    <input autocomplete="off" type="password" required name="password" placeholder="Password" />
-    <input type="submit" value="Submit" />
-  </form>
+    {% for i in dataFromFlask %}
+    <tr>
+      <td>{{ i['name'] }}</td>
+      <td>{{ i['link'] }}</td>
+      <td>{{ i['username'] }}</td>
+      <td>********</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+<!-- <h1>Add new entry:</h1> -->
+<form id="formElem" action="/" method="post">
+  <!-- <h1>Register</h1> -->
+  <input
+    id="name"
+    autocomplete="off"
+    type="text"
+    name="name"
+    placeholder="Website"
+  />
+  <input
+    id="link"
+    autocomplete="off"
+    type="text"
+    name="link"
+    placeholder="link"
+  />
+  <input
+    id="username"
+    autocomplete="off"
+    type="text"
+    name="username"
+    placeholder="Username"
+  />
+  <input
+    id="password"
+    autocomplete="off"
+    type="text"
+    required
+    name="password"
+    placeholder="Password"
+  />
+  <input id="submit" type="submit" value="Submit" />
+</form>
 {% endblock %}
