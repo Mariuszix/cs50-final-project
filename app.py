@@ -31,7 +31,7 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-# Configure CS50 Library to use SQLite database
+
 
 
 # Decorate routes to require login.
@@ -67,6 +67,7 @@ def login():
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
+        session["user_pass"] = request.form.get("password")
 
         # Redirect user to home page
         return redirect("/")
@@ -86,7 +87,9 @@ def index():
     if request.method == "GET":
         data = db.execute("SELECT * FROM data WHERE id=:id", id=user_id)
         data_json = data
-        return render_template("index.html", dataFromFlask=data_json)
+        password = session["user_pass"]
+        
+        return render_template("index.html", dataFromFlask=data_json, dataR=password)
 
     else:
         # Take care of the new entry
@@ -95,12 +98,12 @@ def index():
         username = request.form['username']
         password = request.form['password']
 
-        print(name, link, username, password)
+        
         db.execute("INSERT INTO data (id, name, link, username, hash) VALUES (:id, :name, :link, :username, :hash)",
                    id=user_id, name=name, link=link, username=username, hash=password)
         data = db.execute("SELECT * FROM data WHERE id=:id", id=user_id)
         data_json = json.dumps(data)
-        print(data_json)
+        
 
         return data_json
 
