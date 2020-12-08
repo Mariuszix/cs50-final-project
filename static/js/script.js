@@ -7,15 +7,41 @@ const table = document.querySelector("#list-entries");
 // Select the button that generates a random password
 const genButton = document.querySelector("#generator");
 
-// Select the passwrod field
+// Select the password field
 const passField = document.querySelector("#password");
 
-function revealPass() {
-  const copyText = document.querySelector("#username");
-  copyText.querySelector();
-  copyText.setSelectionRange(0, 999999); //For mobile
-  document.execCommand("copy");
-  alert("Copied the text: " + copyText.value);
+// If there are password fields around, please event listener on them to be able to reveal passwords
+//After checking the password.
+
+function tableText() {
+  let passwordX = crypt.decrypt(this.querySelector(".is-hidden").innerHTML);
+
+  changeText = () => {
+    this.innerHTML = `<p>${passwordX}<p>`;
+  };
+  //Check password
+  pw_prompt({
+    lm: "Please enter your password:",
+    callback: function (password) {
+      if (rx === password) {
+        response = true;
+        changeText();
+      } else {
+        response = false;
+        alert("password not good!");
+      }
+    },
+  });
+}
+
+let cells = document.querySelectorAll(".password-td");
+
+for (let i = 0; i < cells.length; i++) {
+  cells[i].addEventListener("click", tableText);
+}
+
+function functioForHtml() {
+  tableText();
 }
 
 //If we are on the index page where #formElem is.
@@ -51,7 +77,7 @@ if (formElem) {
       document.querySelector("#password").value = "";
 
       //Add the new entry in the view.
-      table.innerHTML += updateTable(name, link, username);
+      table.innerHTML += updateTable(name, link, username, password);
     }
   };
 }
@@ -64,14 +90,36 @@ if (genButton) {
   });
 }
 
+//For the new html created @ TO REFACTOR
+function htmlActivate(elm) {
+  let passwordX = crypt.decrypt(elm.querySelector(".is-hidden").innerHTML);
+
+  changeText = () => {
+    elm.innerHTML = `<p>${passwordX}<p>`;
+  };
+  //Check password
+  pw_prompt({
+    lm: "Please enter your password:",
+    callback: function (password) {
+      if (rx === password) {
+        response = true;
+        changeText();
+      } else {
+        response = false;
+        alert("password not good!");
+      }
+    },
+  });
+}
+
 //Create a new <tr> in the table.
-function updateTable(name, link, username) {
+function updateTable(name, link, username, password) {
   return `
       <tr>
         <td>${name}</td>
         <td>${link}</td>
-        <td>${username}</td>
-        <td>********</td>
+        <td>${username}</button></td>
+        <td class="password-td"><button onclick="htmlActivate(this)">Reveal Password <p class="is-hidden">${password}</p></button> </td>
       </tr>
     `;
 }

@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block title %} Index {% endblock %} {% block main
-%} {{ i }}
+%} 
 <script>
   const clmT = "{{ dataR }}";
 </script>
@@ -17,8 +17,8 @@
     <tr>
       <td>{{ i['name'] }}</td>
       <td> <a target="_blank" href="{{ i['link'] }}">{{ i['link'] }}</a></td>
-      <td id="username">{{ i['username'] }}</td> 
-      <td id="password">********<button  onclick="revealPass()">Show</button> </td> 
+      <td class="username-td">{{ i['username'] }}</td> 
+      <td class="password-td"> <button>Reveal Password<p class="is-hidden">{{ i['hash'] }}</p></button></td> 
     </tr>
     {% endfor %}
   </table>
@@ -60,5 +60,6 @@
 <button id="generator">Generate Password</button>
 
 <script src="{{ url_for('static', filename='js/crypt.js') }}"></script>
+
 <script src="{{ url_for('static', filename='js/passgen.js') }}"></script>
 {% endblock %}
