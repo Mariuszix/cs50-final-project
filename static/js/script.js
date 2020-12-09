@@ -10,39 +10,50 @@ const genButton = document.querySelector("#generator");
 // Select the password field
 const passField = document.querySelector("#password");
 
-// If there are password fields around, please event listener on them to be able to reveal passwords
-//After checking the password.
+//Select the search bar
+const search = document.querySelector("#search-bar");
 
-function tableText() {
-  let passwordX = crypt.decrypt(this.querySelector(".is-hidden").innerHTML);
+//Search in the page
+let searchResults;
+search.addEventListener("keyup", () => {
+  //Clear the Results
+  if (searchResults) {
+    searchResults.innerHTML = "";
+  }
 
-  changeText = () => {
-    this.innerHTML = `<p>${passwordX}<p>`;
-  };
-  //Check password
-  pw_prompt({
-    lm: "Please enter your password:",
-    callback: function (password) {
-      if (rx === password) {
-        response = true;
-        changeText();
-      } else {
-        response = false;
-        alert("password not good!");
+  const toDisplay = [];
+  let timeoutId;
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+  }
+  timeoutId = setTimeout(function () {
+    let names = document.querySelectorAll(".name-search");
+
+    //loop over the Name row
+    for (let i = 0; i < names.length; i++) {
+      // If you find the search string in the name
+      if (
+        names[i].innerHTML.toLowerCase().includes(search.value.toLowerCase())
+      ) {
+        //Add the row where the name was found.
+        toDisplay.push([table.rows[i + 1].innerHTML]);
       }
-    },
-  });
-}
+    }
 
-let cells = document.querySelectorAll(".password-td");
-
-for (let i = 0; i < cells.length; i++) {
-  cells[i].addEventListener("click", tableText);
-}
-
-function functioForHtml() {
-  tableText();
-}
+    //Add results on the page
+    searchResults = document.querySelector("#search-results");
+    if (toDisplay.length > 0) {
+      for (let i = 0; i < toDisplay.length; i++) {
+        searchResults.innerHTML += `<td>${toDisplay[i]}</td>`;
+        if (!search.value) {
+          searchResults.innerHTML = "";
+        }
+      }
+    } else {
+      searchResults.innerHTML = "No results Found";
+    }
+  }, 700);
+});
 
 //If we are on the index page where #formElem is.
 if (formElem) {
@@ -82,7 +93,7 @@ if (formElem) {
   };
 }
 
-//Listen to the generate button and generate password when clicked.
+//Listen to the "generate" button and generate random password when clicked.
 if (genButton) {
   genButton.addEventListener("click", function () {
     let password = generatePass(18);
@@ -90,12 +101,12 @@ if (genButton) {
   });
 }
 
-//For the new html created @ TO REFACTOR
+//Function to run when the password button is clicked
 function htmlActivate(elm) {
   let passwordX = crypt.decrypt(elm.querySelector(".is-hidden").innerHTML);
 
   changeText = () => {
-    elm.innerHTML = `<p>${passwordX}<p>`;
+    elm.outerHTML = `<p class="revealed">${passwordX}</p>`;
   };
   //Check password
   pw_prompt({
@@ -123,12 +134,3 @@ function updateTable(name, link, username, password) {
       </tr>
     `;
 }
-// Encrypt user's password and store it in a variable to be user later on.
-
-// // TEST - ENCRYPT
-// let cipher = crypt.encrypt("FOO BAR");
-// // console.log(cipher);
-
-// // TEST - DECRYPT
-// let decipher = crypt.decrypt(cipher);
-// // console.log(decipher);

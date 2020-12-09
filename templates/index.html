@@ -3,7 +3,9 @@
 <script>
   const clmT = "{{ dataR }}";
 </script>
-
+ <p>Search</p>
+ <input id="search-bar" class="search-bar" type="text" placeholder="Search...">
+ <div id="search-results"></div>
 <h1>List of entries</h1>
 <div>
   <table id="list-entries">
@@ -15,10 +17,10 @@
     </tr>
     {% for i in dataFromFlask %}
     <tr>
-      <td>{{ i['name'] }}</td>
+      <td class="name-search">{{ i['name'] }}</td>
       <td> <a target="_blank" href="{{ i['link'] }}">{{ i['link'] }}</a></td>
       <td class="username-td">{{ i['username'] }}</td> 
-      <td class="password-td"> <button>Reveal Password<p class="is-hidden">{{ i['hash'] }}</p></button></td> 
+      <td class="password-td"> <button onclick="htmlActivate(this)">Reveal Password<p class="is-hidden">{{ i['hash'] }}</p></button></td> 
     </tr>
     {% endfor %}
   </table>
