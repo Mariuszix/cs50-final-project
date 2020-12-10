@@ -1,0 +1,26 @@
+td {
+  position: relative;
+}
+
+.button-toolbar {
+  /* display: none; */
+  border-top: none;
+  top: 100%;
+  left: 50%;
+  left: -2px;
+  width: calc(100% +4px);
+  text-align: center;
+}
+
+.button-toolbar .in-editing {
+  display: block;
+  border: 2px solid rgb(105, 105, 105);
+  border-top: none;
+}
+
+.button-wrapper {
+  padding: 8px;
+  background-color: #fff;
+  border: 2px solid rgb(105, 105, 105);
+  border-top: none;
+}
