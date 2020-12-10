@@ -32,8 +32,6 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
-
-
 # Decorate routes to require login.
 
 
@@ -88,7 +86,7 @@ def index():
         data = db.execute("SELECT * FROM data WHERE id=:id", id=user_id)
         data_json = data
         password = session["user_pass"]
-        
+
         return render_template("index.html", dataFromFlask=data_json, dataR=password)
 
     else:
@@ -98,14 +96,19 @@ def index():
         username = request.form['username']
         password = request.form['password']
 
-        
+        data = db.execute("SELECT * FROM data WHERE id=:id", id=user_id)
+
+        for dat in data:
+            if name == dat['name'] or link == dat['link']:
+                print("is in there")
+                return "duplicate", 409
+            else:
+                print("not here")
+
         db.execute("INSERT INTO data (id, name, link, username, hash) VALUES (:id, :name, :link, :username, :hash)",
                    id=user_id, name=name, link=link, username=username, hash=password)
-        data = db.execute("SELECT * FROM data WHERE id=:id", id=user_id)
-        data_json = json.dumps(data)
-        
 
-        return data_json
+        return "succes", 202
 
 
 # Register user
