@@ -62,13 +62,13 @@
     <tbody>
       {% for i in dataFromFlask %}
       <tr>
-        <td class="name-search">{{ i['name'] }}</td>
+        <td class="name-search" data-entry-id="{{ i['id'] }}">{{ i['name'] }}</td>
         <td>
           <a class="link-search" target="_blank" href="{{ i['link'] }}"
             >{{ i['link'] }}</a
           >
         </td>
-        <td class="username-td">{{ i['username'] }}</td>
+        <td class="username-td"> <p>{{ i['username'] }}</p></td>
         <td class="password-td">
           <button onclick="htmlActivate(this)">
             Reveal Password

@@ -116,15 +116,11 @@ if (formElem) {
       document.querySelector("#username").value = "";
       document.querySelector("#password").value = "";
 
-      // The there is no table it means this is the first entry
-      // Reload the page after the first entry.
-      if (!table) {
-        location.reload();
-      }
+      // Reload the page after any first entry.
+      location.reload();
+
       //Add the new entry in the view.
-      tableBody.innerHTML += updateTable(name, link, username, password);
       formElem.classList.add("is-hidden");
-      console.log(table);
     }
   };
 }
@@ -133,6 +129,11 @@ if (formElem) {
 if (genButton) {
   genButton.addEventListener("click", function () {
     let password = generatePass(18);
+    const passField2 = document.querySelector("#password2");
+    if (passField2) {
+      passField2.innerHTML = password;
+    }
+
     passField.value = password;
   });
 }
@@ -142,7 +143,7 @@ function htmlActivate(elm) {
   let passwordX = crypt.decrypt(elm.querySelector(".is-hidden").innerHTML);
 
   changeText = () => {
-    elm.outerHTML = `${passwordX}`;
+    elm.outerHTML = `<p id="password2">${passwordX}</p>`;
   };
   //Check password
   pw_prompt({
@@ -165,12 +166,28 @@ function updateTable(name, link, username, password) {
       <tr>
         <td class="name-search">${name}</td>
         <td> <a class="link-search" target="_blank" href="${link}">${link}</a></td>
-        <td>${username}</button></td>
+        <td><p>${username}</p></td>
         <td class="password-td"><button onclick="htmlActivate(this)">Reveal Password <p class="is-hidden">${password}</p></button> </td>
       </tr>
     `;
 }
 
+makeRequests = async (data) => {
+  return (response = await fetch("/edit", {
+    method: "POST",
+    body: JSON.stringify(data),
+  }));
+};
+
+combineArrays = (first, second) => {
+  return first.reduce((acc, val, ind) => {
+    acc[val] = second[ind];
+    return acc;
+  }, {});
+};
+
+// Inspired and helped by "The Codeholic" youtube channel.
+// class that helps edit cells
 class TableCellEditing {
   constructor(table) {
     this.tbody = table.querySelector("tbody");
@@ -211,8 +228,35 @@ class TableCellEditing {
 
   finishEditing(td) {
     td.classList.remove("in-editing");
-    //To send changes to backend
-    
+    const data = {};
+
+    let elm = td.parentElement.children;
+    let id = elm[0].getAttribute("data-entry-id");
+    let name = elm[0].innerHTML;
+    let link = elm[1].querySelector("a").innerHTML;
+    let username = elm[2].querySelector("p").innerText;
+    let hash;
+    //If password was not changed
+    if (elm[3].querySelector(".is-hidden")) {
+      console.log("not changed")
+      hash = elm[3].querySelector(".is-hidden").innerHTML;
+    }
+    //If password was changed
+    else {
+      hash = crypt.encrypt(elm[3].querySelector("#password2").innerHTML);
+      
+    }
+
+    let keys = ["id", "name", "link", "username", "hash"];
+    let values = [id, name, link, username, hash];
+
+    for (let i = 0; i < keys.length; i++) {
+      data[keys[i]] = values[i];
+    }
+
+    const response = makeRequests(data);
+    console.log(response);
+
     this.removeToolbar(td);
   }
 
@@ -251,8 +295,10 @@ class TableCellEditing {
   }
 }
 
-const editing = new TableCellEditing(document.querySelector("table"));
-const editingMode = document.querySelector("#edit-mode");
-editingMode.addEventListener("click", () => {
-  editing.init();
-});
+if (document.querySelector("table")) {
+  const editing = new TableCellEditing(document.querySelector("table"));
+  const editingMode = document.querySelector("#edit-mode");
+  editingMode.addEventListener("click", () => {
+    editing.init();
+  });
+}
