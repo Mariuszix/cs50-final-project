@@ -75,6 +75,28 @@ def login():
         return render_template("login.html")
 
 
+@app.route('/edit', methods=["GET", "POST"])
+@login_required
+def edit():
+    db = SQL("sqlite:///passwordmanager.db")
+
+    data = request.get_json(force="True")
+
+
+    id_entry = data['id']
+    name = data['name']
+    link = data['link']
+    username = data['username']
+    password = data['hash']
+    print(data)
+    
+
+    db.execute("UPDATE data SET name = :name, link = :link, username = :username, hash = :hash WHERE id = :id", 
+    name=name, link=link, username=username, hash=password, id=id_entry )
+
+    return "ok", 200
+
+
 @app.route("/", methods=["GET", "POST"])
 @login_required
 def index():
@@ -83,7 +105,8 @@ def index():
     user_id = session["user_id"]
 
     if request.method == "GET":
-        data = db.execute("SELECT * FROM data WHERE id=:id", id=user_id)
+        data = db.execute(
+            "SELECT * FROM data WHERE user_id=:user_id", user_id=user_id)
         data_json = data
         password = session["user_pass"]
 
@@ -96,7 +119,8 @@ def index():
         username = request.form['username']
         password = request.form['password']
 
-        data = db.execute("SELECT * FROM data WHERE id=:id", id=user_id)
+        data = db.execute(
+            "SELECT * FROM data WHERE user_id=:user_id", user_id=user_id)
 
         for dat in data:
             if name == dat['name'] or link == dat['link']:
@@ -105,8 +129,8 @@ def index():
             else:
                 print("not here")
 
-        db.execute("INSERT INTO data (id, name, link, username, hash) VALUES (:id, :name, :link, :username, :hash)",
-                   id=user_id, name=name, link=link, username=username, hash=password)
+        db.execute("INSERT INTO data (user_id, name, link, username, hash) VALUES (:user_id, :name, :link, :username, :hash)",
+                   user_id=user_id, name=name, link=link, username=username, hash=password)
 
         return "succes", 202
 
