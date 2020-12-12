@@ -47,7 +47,6 @@
 <button id="generator">Generate Password</button>
 {% if dataFromFlask %}
 <h1>List of entries</h1>
-<button id="edit-mode">Editing-mode</button>
 <div>
   <table id="list-entries">
     <thead>
@@ -62,13 +61,15 @@
     <tbody>
       {% for i in dataFromFlask %}
       <tr>
-        <td class="name-search" data-entry-id="{{ i['id'] }}">{{ i['name'] }}</td>
+        <td class="name-search" data-entry-id="{{ i['id'] }}">
+          {{ i['name'] }}
+        </td>
         <td>
           <a class="link-search" target="_blank" href="{{ i['link'] }}"
             >{{ i['link'] }}</a
           >
         </td>
-        <td class="username-td"> <p>{{ i['username'] }}</p></td>
+        <td class="username-td"><p>{{ i['username'] }}</p></td>
         <td class="password-td">
           <button onclick="htmlActivate(this)">
             Reveal Password
