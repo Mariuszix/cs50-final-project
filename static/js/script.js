@@ -3,6 +3,7 @@ const formElem = document.querySelector("#formElem");
 
 // Select table
 const table = document.querySelector("#list-entries");
+
 const tableBody = document.querySelector("tbody");
 
 // Select the button that generates a random password
@@ -17,11 +18,16 @@ const search = document.querySelector("#search-bar");
 //Select the new-entry button
 const newEntry = document.querySelector("#add-entry");
 
+//Select the edit and delete button
+const edits = document.querySelectorAll(".edit-button");
+
+const deleteButtons = document.querySelectorAll(".delete-button");
+
 //Activate editing in the table.
-const activate = () => {
-  const editing = new TableCellEditing(document.querySelector("table"));
-  editing.init();
-}
+// const activate = () => {
+//   const editing = new TableCellEditing(document.querySelector("table"));
+//   editing.init();
+// }
 
 if (newEntry) {
   newEntry.addEventListener("click", () => {
@@ -158,13 +164,13 @@ function htmlActivate(elm) {
       if (rx === password) {
         response = true;
         changeText();
-        activate();
       } else {
         response = false;
         alert("password not good!");
       }
     },
   });
+  return true;
 }
 
 //Create a new <tr> in the table.
@@ -193,9 +199,12 @@ combineArrays = (first, second) => {
   }, {});
 };
 
-
-if (document.querySelector("table")) {
-  activate();
+if (deleteButtons) {
+  deleteButtons.forEach((but) => {
+    console.log(but);
+    but.addEventListener("click", function () {
+      
+      console.log(this.parentElement.parentElement)
+    });
+  });
 }
-
-
