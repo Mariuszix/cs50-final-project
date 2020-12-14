@@ -75,6 +75,18 @@ def login():
         return render_template("login.html")
 
 
+# Handle deletion
+@app.route('/delete', methods=["GET", "POST"])
+@login_required
+def delete():
+    db = SQL("sqlite:///passwordmanager.db")
+
+    return "ok", 200
+
+
+    
+
+# When the fields in the front are edited
 @app.route('/edit', methods=["GET", "POST"])
 @login_required
 def edit():

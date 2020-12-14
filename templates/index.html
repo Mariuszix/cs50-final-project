@@ -55,6 +55,7 @@
         <th>Link</th>
         <th>Username</th>
         <th>Password</th>
+        <th>Action</th>
         {% endif %}
       </tr>
     </thead>
@@ -75,6 +76,12 @@
             Reveal Password
             <p class="is-hidden">{{ i['hash'] }}</p>
           </button>
+        </td>
+        <td>
+          <button class="edit-button">Edit</button
+          ><button class="delete-button">Delete</button>
+          <button class="save-button" class="is-hidden">Save</button>
+          <button class="cancel-button" class="is-hidden">Cancel</button>
         </td>
       </tr>
       {% endfor %}
