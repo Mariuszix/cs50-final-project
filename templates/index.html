@@ -72,7 +72,7 @@
         </td>
         <td class="username-td"><p>{{ i['username'] }}</p></td>
         <td class="password-td">
-          <button onclick="htmlActivate(this)">
+          <button class="reveal-button" onclick="htmlActivate(this)">
             Reveal Password
             <p class="is-hidden">{{ i['hash'] }}</p>
           </button>
@@ -80,8 +80,8 @@
         <td>
           <button class="edit-button">Edit</button
           ><button class="delete-button">Delete</button>
-          <button class="save-button" class="is-hidden">Save</button>
-          <button class="cancel-button" class="is-hidden">Cancel</button>
+          <button class="save-button is-hidden">Save</button>
+          <button class="cancel-button is-hidden">Cancel</button>
         </td>
       </tr>
       {% endfor %}
