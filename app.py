@@ -80,11 +80,14 @@ def login():
 @login_required
 def delete():
     db = SQL("sqlite:///passwordmanager.db")
+    data = request.get_json(force="True")
+
+    print(data)
+    response = db.execute("DELETE FROM data WHERE id = :id", id=data)
+    print(response)
 
     return "ok", 200
 
-
-    
 
 # When the fields in the front are edited
 @app.route('/edit', methods=["GET", "POST"])
@@ -94,17 +97,15 @@ def edit():
 
     data = request.get_json(force="True")
 
-
     id_entry = data['id']
     name = data['name']
     link = data['link']
     username = data['username']
     password = data['hash']
     print(data)
-    
 
-    db.execute("UPDATE data SET name = :name, link = :link, username = :username, hash = :hash WHERE id = :id", 
-    name=name, link=link, username=username, hash=password, id=id_entry )
+    db.execute("UPDATE data SET name = :name, link = :link, username = :username, hash = :hash WHERE id = :id",
+               name=name, link=link, username=username, hash=password, id=id_entry)
 
     return "ok", 200
 

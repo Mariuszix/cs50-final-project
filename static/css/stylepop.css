@@ -1,22 +1,26 @@
 .pw_prompt {
-    position:fixed;
-    left: 50%;
-    top:50%;
-    margin-left:-100px;
-    padding:15px;
-    width:200px;
-    border:1px solid black;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-left: -100px;
+  padding: 15px;
+  width: 200px;
+  border: 1px solid black;
 }
 .pw_prompt label {
-    display:block; 
-    margin-bottom:5px;
+  display: block;
+  margin-bottom: 5px;
 }
 .pw_prompt input {
-    margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
 .is-hidden {
-    visibility: hidden;
-    height: 0px;
-    width: 0px;
-  }
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
