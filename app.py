@@ -82,9 +82,7 @@ def delete():
     db = SQL("sqlite:///passwordmanager.db")
     data = request.get_json(force="True")
 
-    print(data)
     response = db.execute("DELETE FROM data WHERE id = :id", id=data)
-    print(response)
 
     return "ok", 200
 
@@ -102,7 +100,6 @@ def edit():
     link = data['link']
     username = data['username']
     password = data['hash']
-    print(data)
 
     db.execute("UPDATE data SET name = :name, link = :link, username = :username, hash = :hash WHERE id = :id",
                name=name, link=link, username=username, hash=password, id=id_entry)
@@ -119,9 +116,11 @@ def index():
 
     if request.method == "GET":
         data = db.execute(
-            "SELECT * FROM data WHERE user_id=:user_id", user_id=user_id)
+            "SELECT * FROM data WHERE user_id=:user_id ORDER BY name", user_id=user_id)
         data_json = data
         password = session["user_pass"]
+
+        print(data)
 
         return render_template("index.html", dataFromFlask=data_json, dataR=password)
 
@@ -137,10 +136,8 @@ def index():
 
         for dat in data:
             if name == dat['name'] or link == dat['link']:
-                print("is in there")
+
                 return "duplicate", 409
-            else:
-                print("not here")
 
         db.execute("INSERT INTO data (user_id, name, link, username, hash) VALUES (:user_id, :name, :link, :username, :hash)",
                    user_id=user_id, name=name, link=link, username=username, hash=password)
