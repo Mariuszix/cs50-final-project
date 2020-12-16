@@ -1,13 +1,13 @@
 // Select formular
 const formElem = document.querySelector("#formElem");
 
+// Select the button that generates a random password
+const genButton = document.querySelector("#generator");
+
 // Select table
 const table = document.querySelector("#list-entries");
 
 const tableBody = document.querySelector("tbody");
-
-// Select the button that generates a random password
-const genButton = document.querySelector("#generator");
 
 // Select the password field
 const passField = document.querySelector("#password");
@@ -18,6 +18,9 @@ const search = document.querySelector("#search-bar");
 //Select the new-entry button
 const newEntry = document.querySelector("#add-entry");
 
+//Select submit button
+const submitButton = document.querySelector("#submit");
+
 //Select the edit and delete button
 let edits = document.querySelectorAll(".edit-button");
 
@@ -26,65 +29,8 @@ let deleteButtons = document.querySelectorAll(".delete-button");
 if (newEntry) {
   newEntry.addEventListener("click", () => {
     formElem.classList.remove("is-hidden");
+    genButton.classList.remove("is-hidden");
   });
-}
-
-//Search in the page
-let searchResults;
-if (search) {
-  search.addEventListener("keyup", () => {
-    //Clear the Results
-    if (searchResults) {
-      searchResults.innerHTML = "";
-    }
-    // Minimum 2 letters for the search to happen
-    if (search.value.length > 1) {
-      const toDisplay = [];
-      let timeoutId;
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-      timeoutId = setTimeout(function () {
-        let names = document.querySelectorAll(".name-search");
-        let links = document.querySelectorAll(".link-search");
-
-        //loop over the Name row
-        for (let i = 0; i < names.length; i++) {
-          // If you find the search string in the name
-          if (
-            names[i].innerHTML
-              .toLowerCase()
-              .includes(search.value.toLowerCase()) ||
-            links[i].innerHTML
-              .toLowerCase()
-              .includes(search.value.toLowerCase())
-          ) {
-            //Add the row where the name was found.
-            if (!toDisplay.includes([table.rows[i + 1].innerHTML])) {
-              toDisplay.push([table.rows[i + 1].innerHTML]);
-            }
-          }
-        }
-
-        //Add results on the page
-        searchResults = document.querySelector("#search-results");
-
-        if (toDisplay.length > 0) {
-          searchResults.innerHTML = "";
-          for (let i = 0; i < toDisplay.length; i++) {
-            searchResults.innerHTML += `<div><td>${toDisplay[i]}</td></div>`;
-            if (!search.value) {
-              searchResults.innerHTML = "";
-            }
-          }
-        } else {
-          searchResults.innerHTML = "No results Found";
-        }
-        
-      }, 500);
-    }
-  });
-  
 }
 
 //If we are on the index page where #formElem is.
@@ -129,6 +75,7 @@ if (formElem) {
 
       //Add the new entry in the view.
       formElem.classList.add("is-hidden");
+      genButton.classList.add("is-hidden");
     }
   };
 }
@@ -136,13 +83,12 @@ if (formElem) {
 //Listen to the "generate" button and generate random password when clicked.
 if (genButton) {
   genButton.addEventListener("click", function () {
-    let password = generatePass(18);
-    const passField2 = document.querySelector("#password2");
-    if (passField2) {
-      passField2.innerHTML = password;
-    }
+    let password;
+    let passFieldInEdit = document.querySelector("#password");
 
-    passField.value = password;
+    password = generatePass(18);
+    passFieldInEdit.value = password;
+    checkPassField();
   });
 }
 
@@ -151,7 +97,7 @@ function htmlActivate(elm) {
   let passwordX = crypt.decrypt(elm.querySelector(".is-hidden").innerHTML);
 
   changeText = () => {
-    elm.outerHTML = `<p id="password2">${passwordX}</p>`;
+    elm.outerHTML = `<p class="password2">${passwordX}</p>`;
   };
   //Check password
   pw_prompt({
@@ -195,166 +141,52 @@ combineArrays = (first, second) => {
   }, {});
 };
 
-//Change td to inputs ready for editing
-function trToInput(elm) {
-  let theInput = document.createElement("input");
-  theInput.classList.add("artificial-input");
-  theInput.value = elm.innerText;
-  elm.parentNode.insertBefore(theInput, elm);
-  elm.classList.add("is-hidden");
+{
+  /* <div class="err-msg" id="passError"></div>; */
 }
 
-//Change inputs back to td
-function inputToTd(elm, data) {
-  let inputField = elm.parentNode.querySelector(".artificial-input");
-  elm.innerHTML = data;
-  inputField.remove();
-  elm.classList.remove("is-hidden");
+passField.addEventListener("keyup", checkPassField);
+
+function checkPassField() {
+  let input = passField.value;
+  console.log(input);
+  let msgBox;
+  if (msgBox) {
+    msgBox.innerHTML = "";
+  }
+  msgBox = document.querySelector("#passError");
+  if (input.slice(0, 1) == " " || input.slice(-1) == " " || input.length < 8) {
+    submitButton.disabled = true;
+    setTimeout(function () {
+      msgBox.innerHTML = `
+      <p class="error-p">Password must be at least 8 characters long. Should not begin or end with 'space'.</p>
+      `;
+    }, 300);
+  } else {
+    submitButton.disabled = false;
+    msgBox.innerHTML = "";
+  }
 }
 
-//In this section the editing and deleting of the entries will be handle.
-function activateEditDelete() {
-  edits = document.querySelectorAll(".edit-button");
-  deleteButtons = document.querySelectorAll(".delete-button");
-  //For edit
-  edits.forEach((edit) => {
-    edit.addEventListener("click", function () {
-      let row = this.parentElement.parentElement;
-      //Ask fot the password and reveal password
-      let passButt = row.querySelector(".reveal-button");
-      if (passButt) {
-        alert("You must reveal the password before editing the entry");
-      } else {
-        //Select all the data fields to be changed into inputs.
-        let name = row.querySelector(".name-search");
-        let link = row.querySelector(".link-search");
-        let username = row.querySelector(".username-td");
-        let password = row.querySelector(".password-td");
-        let editButton = row.querySelector(".edit-button");
-        let delButton = row.querySelector(".delete-button");
-        let saveButton = row.querySelector(".save-button");
-        let canButton = row.querySelector(".cancel-button");
+function searchFunc() {
+  let input, filter, names, nameText, i, linkText;
 
-        //Name
-        trToInput(name);
-        //Link
-        trToInput(link);
-        //username
-        trToInput(username);
-        //password
-        trToInput(password);
+  input = document.querySelector("#mySearch");
+  filter = input.value.toLowerCase();
+  body = document.querySelector("tbody");
+  names = document.querySelectorAll(".name-search");
+  link = document.querySelectorAll(".link-search");
 
-        //Hide edit and delete buttons and show save and cancel
-        editButton.classList.add("is-hidden");
-        delButton.classList.add("is-hidden");
-        saveButton.classList.remove("is-hidden");
-        canButton.classList.remove("is-hidden");
+  for (i = 0; i < names.length; i++) {
+    nameText = names[i].innerHTML;
+    linkText = link[i].innerHTML;
 
-        //Save the old data in the inputs before adding a event listener
-        const oldData = {};
-
-        oldData["name"] = name.innerText.trim();
-        oldData["link"] = link.innerText.trim();
-        oldData["username"] = username.innerText.trim();
-        oldData["password"] = password.innerText.trim();
-        //Spaces not allowed in the begining or end of password
-
-        //In case the cancel is pressed
-        canButton.addEventListener("click", () => {
-          //Make all the inputs back "td" with the old values
-          //Name
-          inputToTd(name, oldData["name"]);
-          //Link
-          inputToTd(link, oldData["link"]);
-          //username
-          inputToTd(username, oldData["username"]);
-          //password
-          inputToTd(password, oldData["password"]);
-
-          //Hide edit and delete buttons and show save and cancel
-          editButton.classList.remove("is-hidden");
-          delButton.classList.remove("is-hidden");
-          saveButton.classList.add("is-hidden");
-          canButton.classList.add("is-hidden");
-        });
-
-        //When the save button is pressed
-        saveButton.addEventListener("click", async () => {
-          const dataEdited = {};
-          row = this.parentElement.parentElement;
-
-          //Get the data from the inputs and back it in an object
-          let id = row
-            .querySelector(".name-search")
-            .getAttribute("data-entry-id");
-
-          name = row.querySelector(".artificial-input").value;
-          inputToTd(row.querySelector(".name-search"), name);
-
-          link = row.querySelector(".artificial-input").value;
-          inputToTd(row.querySelector(".link-search"), link);
-
-          username = row.querySelector(".artificial-input").value;
-          inputToTd(row.querySelector(".username-td"), username);
-
-          password = crypt.encrypt(
-            row.querySelector(".artificial-input").value
-          );
-          inputToTd(
-            row.querySelector(".password-td"),
-            row.querySelector(".artificial-input").value
-          );
-
-          dataEdited["id"] = id;
-          dataEdited["name"] = name;
-          dataEdited["link"] = link;
-          dataEdited["username"] = username;
-          dataEdited["hash"] = password;
-
-          let response = await fetch("/edit", {
-            method: "POST",
-            body: JSON.stringify(dataEdited),
-          });
-
-          if (response.status == 200) {
-            console.log("succesfull");
-            location.reload();
-          } else {
-            alert("Error");
-          }
-        });
-      }
-    });
-  });
-
-  //For delete
-  deleteButtons.forEach((but) => {
-    but.addEventListener("click", async function () {
-      //First prompt the user for confirmation of deletion and password
-
-      // @TODO
-
-      //Get the entry id that needs to be used to delete the entry in DB
-      let row = this.parentElement.parentElement;
-      let name = row.querySelector("td");
-      let entryId = name.getAttribute("data-entry-id");
-
-      //Send the Id to the back
-      let response = await fetch("/delete", {
-        method: "POST",
-        body: JSON.stringify(entryId),
-      });
-      if (response.status == 200) {
-        console.log("Succesfully deleted");
-        // Reload the page
-        location.reload();
-      } else {
-        console.log("Error deleting, code not 200");
-      }
-    });
-  });
-}
-
-if (deleteButtons) {
-  activateEditDelete();
+    if (nameText.toLowerCase().indexOf(filter) > -1) {
+      names[i].parentElement.style.display = "";
+    } else if (linkText.toLowerCase().indexOf(filter) > -1) {
+      names[i].parentElement.style.display = "";
+    } else {
+      names[i].parentElement.style.display = "none";
+    }
+  }
 }

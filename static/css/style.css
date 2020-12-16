@@ -24,3 +24,8 @@ td {
   border: 2px solid rgb(105, 105, 105);
   border-top: none;
 }
+
+.error-p {
+  color: rgb(218, 42, 42);
+  font-size: 11px;
+}

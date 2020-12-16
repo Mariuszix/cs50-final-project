@@ -3,9 +3,13 @@
 <script>
   const clmT = "{{ dataR }}";
 </script>
-<p>Search:</p>
-<input id="search-bar" class="search-bar" type="text" placeholder="Search..." />
-<div id="search-results"></div>
+<input
+  type="text"
+  id="mySearch"
+  onkeyup="searchFunc()"
+  placeholder="Search.."
+  title="Type in a category"
+/>
 
 <div><button id="add-entry">Add new entry:</button></div>
 
@@ -24,6 +28,7 @@
     type="text"
     name="link"
     placeholder="http://link"
+    value="http://"
   />
   <input
     id="username"
@@ -34,6 +39,7 @@
     required
   />
   <input
+    class="in-edit"
     id="password"
     autocomplete="off"
     type="text"
@@ -41,10 +47,11 @@
     name="password"
     placeholder="Password"
   />
+  <div class="err-msg" id="passError"></div>
   <input id="submit" type="submit" value="Submit" />
 </form>
 
-<button id="generator">Generate Password</button>
+<button id="generator" class="is-hidden">Generate Password</button>
 {% if dataFromFlask %}
 <h1>List of entries</h1>
 <div>
@@ -78,10 +85,23 @@
           </button>
         </td>
         <td>
-          <button class="edit-button">Edit</button
-          ><button class="delete-button">Delete</button>
-          <button class="save-button is-hidden">Save</button>
-          <button class="cancel-button is-hidden">Cancel</button>
+          <button class="edit-button" onclick="editOnClick(this)">Edit</button
+          ><button class="delete-button" onclick="deleteOnClick(this)">
+            Delete
+          </button>
+          <button class="save-button is-hidden" onclick="saveOnlclick(this)">
+            Save
+          </button>
+          <button class="cancel-button is-hidden" onclick="cancelOnClick(this)">
+            Cancel
+          </button>
+          <button
+            onclick="generatePassword2(this)"
+            id="generator2"
+            class="generate-button is-hidden"
+          >
+            Generate Password
+          </button>
         </td>
       </tr>
       {% endfor %}
@@ -89,7 +109,4 @@
   </table>
 </div>
 
-<script src="{{ url_for('static', filename='js/crypt.js') }}"></script>
-
-<script src="{{ url_for('static', filename='js/passgen.js') }}"></script>
 {% endblock %}
