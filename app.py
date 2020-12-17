@@ -32,7 +32,9 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
-# Decorate routes to require login.
+@app.route('/')
+def welcome():
+   return render_template("welcome.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -68,7 +70,7 @@ def login():
         session["user_pass"] = request.form.get("password")
 
         # Redirect user to home page
-        return redirect("/")
+        return redirect("/home")
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
@@ -107,7 +109,7 @@ def edit():
     return "ok", 200
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/home", methods=["GET", "POST"])
 @login_required
 def index():
 

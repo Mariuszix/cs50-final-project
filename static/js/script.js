@@ -53,7 +53,7 @@ if (formElem) {
     data.append("password", password);
 
     //Send the info to the back-end
-    let response = await fetch("/", {
+    let response = await fetch("/home", {
       method: "POST",
       body: data,
     });

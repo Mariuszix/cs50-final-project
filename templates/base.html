@@ -13,15 +13,26 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/stylepop.css') }}"
     />
-    
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <header>
-      <p>header</p>
-    </header>
-    {% block main %} {% endblock%}
-
-    <footer></footer>
+    <main>
+      <header>
+        <h1>PassApp</h1>
+        {% block header %}{% endblock %}
+      </header>
+      {% if session.user_id %}
+      <a class="nav-link" href="/logout">Log Out</a>
+      {% endif %} {% block main %} {% endblock%}
+    </main>
+    <footer>
+      <p class="footer-text">Marius Cernescu, Final Project CS50</p>
+      <p class="footer-text">2020</p>
+    </footer>
     <script src="{{ url_for('static', filename='js/crypt.js') }}"></script>
     <script src="{{ url_for('static', filename='js/passgen.js') }}"></script>
     <script src="{{ url_for('static', filename='js/buttonsFuncs.js') }}"></script>
