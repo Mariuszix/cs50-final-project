@@ -1,5 +1,29 @@
+html {
+  font-family: "Poppins", sans-serif;
+}
+main {
+  height: 100vh;
+}
+
+header {
+  color: #23575a;
+  padding: 0.2rem;
+  position: relative;
+}
+
+header h1 {
+  font-size: 30px;
+  font-weight: 600;
+  padding-left: 2rem;
+}
+
 td {
   position: relative;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .button-toolbar {
@@ -28,4 +52,88 @@ td {
 .error-p {
   color: rgb(218, 42, 42);
   font-size: 11px;
+}
+
+footer {
+  position: relative;
+  margin-bottom: 1.2rem;
+}
+.footer-text {
+  color: #4c4c4c;
+  text-align: center;
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+}
+
+.welcome-page {
+  background-color: #23575a;
+  color: white;
+  height: 70vh;
+  position: relative;
+}
+
+.button-div {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+}
+
+.btn-sign-in {
+  border: solid 3px #4c4c4c;
+  border-radius: 5px;
+  padding: 0.3rem 1.2rem;
+  color: #4c4c4c;
+  font-weight: 500;
+  font-size: 18px;
+  margin-right: 1rem;
+}
+
+.btn-sign-in:hover {
+  color: #23575a;
+  border-color: #23575a;
+}
+
+.btn-sign-up {
+  border: solid 3px #23575a;
+  border-radius: 5px;
+  padding: 0.3rem 1.2rem;
+  color: white;
+  font-weight: 500;
+  font-size: 18px;
+  background-color: #23575a;
+}
+.btn-sign-up:hover {
+  background-color: #164949;
+}
+
+.welcome-page {
+  text-align: center;
+  padding-top: 6rem;
+}
+
+.welcome-page h1 {
+  padding-top: 2rem;
+  font-weight: 400;
+  font-size: 45px;
+}
+.welcome-page h2 {
+  font-weight: 400;
+  font-size: 21px;
+  padding-bottom: 2.5rem;
+}
+
+.btn-sing-up2 {
+  border: solid 2.2px white;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 23px;
+  background-color: white;
+  color: #4c4c4c;
+  padding: 1.3rem 5.4rem;
+}
+
+.btn-sing-up2:hover {
+  color: #23575a;
 }
