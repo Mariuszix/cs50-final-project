@@ -13,7 +13,7 @@ header {
 
 header h1 {
   font-size: 30px;
-  font-weight: 600;
+  font-weight: 700;
   padding-left: 2rem;
 }
 
@@ -57,6 +57,7 @@ a {
 footer {
   position: relative;
   margin-bottom: 1.2rem;
+  margin-top: 10rem;
 }
 .footer-text {
   color: #4c4c4c;
@@ -70,8 +71,12 @@ footer {
 .welcome-page {
   background-color: #23575a;
   color: white;
-  height: 70vh;
+  height: 90vh;
   position: relative;
+}
+
+.homepage-elm {
+  margin-top: 5rem;
 }
 
 .button-div {
@@ -136,4 +141,80 @@ footer {
 
 .btn-sing-up2:hover {
   color: #23575a;
+}
+
+.login-sqare {
+  text-align: center;
+  margin: auto;
+  padding: 1rem;
+  height: 500px;
+  width: auto;
+}
+
+.login-sqare h1 {
+  text-align: center;
+  font-weight: 500;
+  font-size: 50px;
+  color: #23575a;
+}
+
+.input {
+  width: 26rem;
+  height: 5rem;
+  border: 1px hidden;
+  border-radius: 8px;
+  border-color: #e0e0e0;
+  background-color: #e0e0e0;
+  margin: 0.8rem;
+  font-size: 32px;
+  color: #4c4c4c;
+  padding-left: 2rem;
+}
+
+.button-reg {
+  border: solid 2.2px #23575a;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 25px;
+  background-color: #23575a;
+  color: white;
+  padding: 1.6rem 5.2rem;
+  margin: 0.8rem 0 3rem 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+.no-outline:focus {
+  outline: none;
+}
+
+/* Placeholder style */
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #4c4c4c60;
+  font-size: 30px;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #4c4c4c60;
+  font-size: 30px;
+}
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #4c4c4c60;
+  font-size: 30px;
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #4c4c4c60;
+  font-size: 30px;
 }
