@@ -1,20 +1,41 @@
-{% extends 'base.html' %}
-
-{% block title %}
-    Registration form
-{% endblock title %}
-    
-
-{% block main %}
+{% extends 'base.html' %} {% block title %} Registration form {% endblock title
+%} {% block main %}
 <div class="login-sqare">
-    <form action="/register" method="post">
-      <h1>Register</h1>
-      <input autocomplete="off" type="text" name="username" placeholder="Username" />
-      <input autocomplete="off" type="password" required name="password" placeholder="Password" />
-      <input autocomplete="off" type="password" required name="confirmation" placeholder="Verify Password" />
-      <input type="submit" value="Register" />
-    </form>
-  </div>
-  
+  <form action="/register" method="post">
+    <h1>Welcome!</h1>
+    <div class="reg-form">
+      <div>
+        <input
+          class="input no-outline"
+          autocomplete="off"
+          type="text"
+          name="username"
+          placeholder="Username"
+        />
+      </div>
+      <div>
+        <input
+          class="input no-outline"
+          autocomplete="off"
+          type="password"
+          required
+          name="password"
+          placeholder="Password"
+        />
+      </div>
+      <div>
+        <input
+          class="input no-outline"
+          autocomplete="off"
+          type="password"
+          required
+          name="confirmation"
+          placeholder="Repeat Password"
+        />
+      </div>
+      <input class="button-reg" type="submit" value="SIGN UP" />
+    </div>
+  </form>
+</div>
+
 {% endblock %}
-    
