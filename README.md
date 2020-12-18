@@ -3,7 +3,7 @@ This is my final project for the cs50 course by Harvard.
 
 **Homepage**
 </br>
-![picture with the homepage of the app](/Images/Welcome.png?raw=true)
+![picture with the homepage of the app](/Images/Welcom.png?raw=true)
 
 **Registration page**
 </br>
