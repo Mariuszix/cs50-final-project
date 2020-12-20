@@ -32,9 +32,27 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
+@app.route('/check', methods=["GET", "POST"])
+def check_user():
+    db = SQL("sqlite:///passwordmanager.db")
+    data = request.get_json(force="True")
+
+    user_list = db.execute("SELECT username FROM users")
+    users = []
+    for row in user_list:
+        users.append(row['username'])
+    if data in users:
+        return "ok", 208
+    else:
+        return "ok", 200
+    
+
+
+
+
 @app.route('/')
 def welcome():
-   return render_template("welcome.html")
+    return render_template("welcome.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -84,7 +102,7 @@ def delete():
     db = SQL("sqlite:///passwordmanager.db")
     data = request.get_json(force="True")
 
-    response = db.execute("DELETE FROM data WHERE id = :id", id=data)
+    db.execute("DELETE FROM data WHERE id = :id", id=data)
 
     return "ok", 200
 

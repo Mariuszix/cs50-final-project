@@ -6,15 +6,19 @@
     <div class="reg-form">
       <div>
         <input
+          id="user-reg"
           class="input no-outline"
           autocomplete="off"
           type="text"
           name="username"
           placeholder="Username"
+          required
         />
       </div>
+      <div id="user-error"></div>
       <div>
         <input
+          id="pass-input"
           class="input no-outline"
           autocomplete="off"
           type="password"
@@ -23,8 +27,10 @@
           placeholder="Password"
         />
       </div>
+      <div id="pass-error"></div>
       <div>
         <input
+          id="pass-repeat"
           class="input no-outline"
           autocomplete="off"
           type="password"
@@ -33,9 +39,10 @@
           placeholder="Repeat Password"
         />
       </div>
-      <input class="button-reg" type="submit" value="SIGN UP" />
+      <div id="pass-verify"></div>
+      <input id="submit-reg" class="button-reg" type="submit" value="SIGN UP" />
     </div>
   </form>
 </div>
-
+<script src="{{ url_for('static', filename='js/registChecks.js') }}"></script>
 {% endblock %}

@@ -1,4 +1,5 @@
 //Save user's password in rx and use it as the encryption key.
+
 const rx = clmT;
 let crypt = {
   secret: rx,
