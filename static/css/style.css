@@ -210,6 +210,36 @@ footer {
   padding: 0.5rem;
 }
 
+.error-div {
+  margin: 0;
+  padding: 0;
+}
+
+.reg-form input {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.reg-form div {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.reg-form p {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+@media only screen and (max-width: 550px) {
+  .login-sqare input {
+    margin-left: 0;
+    margin-right: 8px;
+  }
+  .login-sqare {
+    margin-left: 0;
+    padding-left: 0;
+  }
+}
 /* Placeholder style */
 
 ::-webkit-input-placeholder {
