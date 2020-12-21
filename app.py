@@ -45,14 +45,15 @@ def check_user():
         return "ok", 208
     else:
         return "ok", 200
-    
-
-
 
 
 @app.route('/')
 def welcome():
-    return render_template("welcome.html")
+    if 'user_id' in session:
+        return redirect("/home")
+    else:
+        return render_template("welcome.html")
+
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -86,6 +87,7 @@ def login():
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
         session["user_pass"] = request.form.get("password")
+        
 
         # Redirect user to home page
         return redirect("/home")
@@ -139,8 +141,6 @@ def index():
             "SELECT * FROM data WHERE user_id=:user_id ORDER BY name", user_id=user_id)
         data_json = data
         password = session["user_pass"]
-
-        print(data)
 
         return render_template("index.html", dataFromFlask=data_json, dataR=password)
 
@@ -202,9 +202,9 @@ def logout():
 
     # Forget any user_id
     session.clear()
-
+    session["user_loged"] = 0
     # Redirect user to login form
-    return redirect("/")
+    return redirect("/login")
 
 
 def errorhandler(e):

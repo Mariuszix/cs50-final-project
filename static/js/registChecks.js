@@ -32,11 +32,13 @@ passInput.addEventListener("keyup", function () {
 });
 
 passVeryfication.addEventListener("keyup", function () {
-  if (passVeryfication.value != passInput.value) {
-    msgBoxVerify.innerHTML = `<p class="error-p">Passwords do not match</p>`;
-    submitButton.disabled = true;
-  } else {
-    msgBoxVerify.innerHTML = "";
-    submitButton.disabled = false;
-  }
+  setInterval(() => {
+    if (passVeryfication.value != passInput.value) {
+      msgBoxVerify.innerHTML = `<p class="error-p">Passwords do not match</p>`;
+      submitButton.disabled = true;
+    } else {
+      msgBoxVerify.innerHTML = "";
+      submitButton.disabled = false;
+    }
+  }, 1000);
 });
