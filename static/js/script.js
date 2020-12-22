@@ -141,10 +141,6 @@ combineArrays = (first, second) => {
   }, {});
 };
 
-{
-  /* <div class="err-msg" id="passError"></div>; */
-}
-
 passField.addEventListener("keyup", checkPassField);
 
 function checkPassField() {

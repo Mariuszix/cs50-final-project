@@ -4,57 +4,66 @@
   const clmT = "{{ dataR }}";
 </script>
 <input
+  class="search-bar no-outline"
   type="text"
   id="mySearch"
   onkeyup="searchFunc()"
-  placeholder="Search.."
+  placeholder="search"
   title="Type in a category"
+  autocomplete="off"
 />
-
-<div><button id="add-entry">Add new entry:</button></div>
-
-<form class="is-hidden" id="formElem" action="/" method="post">
-  <input
-    id="name"
-    autocomplete="off"
-    type="text"
-    name="name"
-    placeholder="Website"
-    required
-  />
-  <input
-    id="link"
-    autocomplete="off"
-    type="text"
-    name="link"
-    placeholder="http://link"
-    value="http://"
-  />
-  <input
-    id="username"
-    autocomplete="off"
-    type="text"
-    name="username"
-    placeholder="Username"
-    required
-  />
-  <input
-    class="in-edit"
-    id="password"
-    autocomplete="off"
-    type="text"
-    required
-    name="password"
-    placeholder="Password"
-  />
-  <div class="err-msg" id="passError"></div>
-  <input id="submit" type="submit" value="Submit" />
-</form>
+<div class="div-logout">
+  <a class="nav-link" href="/logout">SIGN OUT</a>
+</div>
+<div class="add-entry-div"><button id="add-entry">ADD NEW ENTRY</button></div>
+<div class="form-entry">
+  <form class="is-hidden" id="formElem" action="/" method="post">
+    <input
+      class="no-outline"
+      id="name"
+      autocomplete="off"
+      type="text"
+      name="Website Name"
+      placeholder="Website"
+      required
+    />
+    <input
+      class="no-outline"
+      id="link"
+      autocomplete="off"
+      type="text"
+      name="link"
+      placeholder="Link"
+    />
+    <input
+      class="no-outline"
+      id="username"
+      autocomplete="off"
+      type="text"
+      name="username"
+      placeholder="Username"
+      required
+    />
+    <input
+      class="no-outline"
+      class="in-edit"
+      id="password"
+      autocomplete="off"
+      type="text"
+      required
+      name="password"
+      placeholder="Password"
+    />
+    <div class="err-msg" id="passError"></div>
+    <input id="submit" type="submit" value="Submit" />
+  </form>
+</div>
 
 <button id="generator" class="is-hidden">Generate Password</button>
 {% if dataFromFlask %}
-<h1>List of entries</h1>
-<div>
+
+<div class="entry-div">
+  <h1>My List</h1>
   <table id="list-entries">
     <thead>
       <tr>

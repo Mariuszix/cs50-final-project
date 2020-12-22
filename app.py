@@ -55,7 +55,6 @@ def welcome():
         return render_template("welcome.html")
 
 
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
@@ -87,7 +86,6 @@ def login():
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
         session["user_pass"] = request.form.get("password")
-        
 
         # Redirect user to home page
         return redirect("/home")
