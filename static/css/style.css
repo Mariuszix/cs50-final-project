@@ -284,23 +284,54 @@ footer {
 }
 
 .form-entry {
+  display: flex;
+  justify-content: center;
   position: relative;
-  margin: 10rem 0 2rem 3rem;
+  margin: 10rem 0 0rem 0;
 }
 
 .form-entry input {
   margin: 0.5rem 1.5rem 0.5rem 0;
-  height: 1.4rem;
+  height: 1.7rem;
   border-radius: 5px;
   border-color: #4c4c4c;
-  width: 16rem;
-  padding: 0.7rem 0 0 0.5rem;
+  width: 20.5rem;
+  padding: 0.3rem 0 0 0.5rem;
   font-size: 23px;
+}
+
+#submit {
+  position: absolute;
+  right: 1rem;
+  width: 7rem;
+  height: 2.2rem;
+  padding: 0;
+  font-weight: 500;
+  font-size: 20px;
+  border: solid 3px #23575a;
+  color: white;
+  background-color: #23575a;
+  cursor: pointer;
+}
+
+#generator {
+  position: absolute;
+  right: 11rem;
+  width: 20rem;
+  height: 2.2rem;
+  font-weight: 500;
+  font-size: 20px;
+  margin-top: 0.5rem;
+  border: solid 3px #4c4c4c;
+  border-radius: 5px;
+  background-color: #4c4c4c;
+  color: white;
+  cursor: pointer;
   
 }
 
-.entry-div {
-
+#passError {
+  margin-left: 62rem;
 }
 
 /* Placeholder style */
