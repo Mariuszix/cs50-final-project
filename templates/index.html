@@ -67,11 +67,11 @@
   <table id="list-entries">
     <thead>
       <tr>
-        <th>Name</th>
+        <th>Website Name</th>
         <th>Link</th>
         <th>Username</th>
         <th>Password</th>
-        <th>Action</th>
+        <th class="is-hidden">Action</th>
         {% endif %}
       </tr>
     </thead>
@@ -89,20 +89,20 @@
         <td class="username-td"><p>{{ i['username'] }}</p></td>
         <td class="password-td">
           <button class="reveal-button" onclick="htmlActivate(this)">
-            Reveal Password
+            REVEAL PASSWORD
             <p class="is-hidden">{{ i['hash'] }}</p>
           </button>
         </td>
-        <td>
-          <button class="edit-button" onclick="editOnClick(this)">Edit</button
+        <td class="buttons-e-d">
+          <button class="edit-button" onclick="editOnClick(this)">EDIT</button
           ><button class="delete-button" onclick="deleteOnClick(this)">
-            Delete
+            DELETE
           </button>
           <button class="save-button is-hidden" onclick="saveOnlclick(this)">
-            Save
+            SAVE
           </button>
           <button class="cancel-button is-hidden" onclick="cancelOnClick(this)">
-            Cancel
+            CANCEL
           </button>
           <button
             onclick="generatePassword2(this)"

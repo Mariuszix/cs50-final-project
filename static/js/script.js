@@ -101,14 +101,14 @@ function htmlActivate(elm) {
   };
   //Check password
   pw_prompt({
-    lm: "Please enter your password:",
+    lm: "Please enter your PassApp password to confirm: ",
     callback: function (password) {
       if (rx === password) {
         response = true;
         changeText();
       } else {
         response = false;
-        alert("password not good!");
+        alert("Incorrect password");
       }
     },
   });
