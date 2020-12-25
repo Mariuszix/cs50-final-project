@@ -334,10 +334,6 @@ footer {
   margin-left: 62rem;
 }
 
-.link-search {
-  color: #23575a;
-}
-
 table {
   width: 100%;
   font-size: 20px;
@@ -349,6 +345,7 @@ td {
 
 .link-search {
   padding-left: 2rem;
+  color: #23575a;
 }
 
 .name-search {
@@ -374,6 +371,7 @@ td {
 
 .buttons-e-d {
   padding-left: 0;
+  
 }
 .password-td {
   width: 15rem;
@@ -400,6 +398,35 @@ td {
   font-size: 17px;
   color: white;
   padding: 0.2rem 0.6rem;
+}
+
+.entry-div h1 {
+  margin-left: 1.4rem;
+}
+
+.artificial-input {
+  height: 1.5rem;
+  border-radius: 5px;
+  border-color: #4c4c4c;
+  width: 20rem;
+  padding: 0.2rem 0 0 0.2rem;
+  font-size: 20px;
+  margin-left: 1rem;
+}
+
+.buttons-in-edit {
+  position: absolute;
+  text-align: center;
+  border: solid;
+  width: 1px;
+  align-self: center;
+}
+
+.row-in-edit {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  top: 12rem
 }
 
 /* Placeholder style */
