@@ -81,7 +81,7 @@
         <td class="name-search" data-entry-id="{{ i['id'] }}">
           {{ i['name'] }}
         </td>
-        <td>
+        <td class="link-search">
           <a class="link-search" target="_blank" href="{{ i['link'] }}"
             >{{ i['link'] }}</a
           >
@@ -98,6 +98,7 @@
           ><button class="delete-button" onclick="deleteOnClick(this)">
             DELETE
           </button>
+          <div class="buttons-in-edit">
           <button class="save-button is-hidden" onclick="saveOnlclick(this)">
             SAVE
           </button>
@@ -109,8 +110,9 @@
             id="generator2"
             class="generate-button is-hidden"
           >
-            Generate Password
+            GENERATE NEW PASSWORD
           </button>
+        </div>
         </td>
       </tr>
       {% endfor %}

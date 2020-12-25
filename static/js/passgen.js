@@ -5,17 +5,12 @@ function generatePass(length) {
     // Generate a number from 33 to 126 (0 - 93) + 33
     let nr = Math.floor(Math.random() * 93) + 33;
     // Spaces not allowed
-    if (nr !== 32) {
-      if (nr !== parseFloat(numbers[i - 1])) {
-        numbers += String.fromCharCode(nr);
-      } else {
-        if (nr < 34) {
-          numbers += String.fromCharCode(nr + 1);
-        } else {
-          numbers += String.fromCharCode(nr - 1);
-        }
-      }
+    if (String.fromCharCode(nr) !== " ") {
+      numbers += String.fromCharCode(nr);
+    } else {
+      numbers += String.fromCharCode(nr + 1);
     }
   }
+
   return numbers;
 }

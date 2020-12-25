@@ -15,6 +15,7 @@ function generatePassword2(elm) {
 //Change td to inputs ready for editing
 function trToInput(elm) {
   let theInput = document.createElement("input");
+
   theInput.classList.add("artificial-input");
   theInput.classList.add("no-outline");
   if (elm.querySelector(".password2")) {
@@ -22,6 +23,7 @@ function trToInput(elm) {
   }
 
   theInput.value = elm.innerText;
+
   elm.parentNode.insertBefore(theInput, elm);
   elm.classList.add("is-hidden");
 }
@@ -94,6 +96,7 @@ function cancelOnClick(elm) {
   saveButton.classList.add("is-hidden");
   canButton.classList.add("is-hidden");
   genButton2.classList.add("is-hidden");
+  row.classList.remove("row-in-edit");
 
   rowInEdit = false;
 }
@@ -132,6 +135,8 @@ function editOnClick(elm) {
     trToInput(username);
     //password
     trToInput(password);
+    console.log(row);
+    row.classList.add("row-in-edit");
 
     //Hide edit and delete buttons and show save and cancel
     editButton.classList.add("is-hidden");
@@ -181,6 +186,7 @@ async function saveOnlclick(elm) {
   dataEdited["hash"] = password;
   let genButton = row.querySelector(".generate-button");
   genButton.classList.add("is-hidden");
+  row.classList.remove("row-in-edit");
 
   let response = await fetch("/edit", {
     method: "POST",
