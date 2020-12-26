@@ -13,3 +13,7 @@ This is my final project for the cs50 course by Harvard.
 </br>
 ![picture with the registration page](/Images/LogIn.png?raw=true)
 
+**Main page**
+</br>
+![picture with the registration page](/Images/app.png?raw=true)
+
