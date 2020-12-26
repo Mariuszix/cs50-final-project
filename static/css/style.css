@@ -371,7 +371,6 @@ td {
 
 .buttons-e-d {
   padding-left: 0;
-  
 }
 .password-td {
   width: 15rem;
@@ -414,21 +413,57 @@ td {
   margin-left: 1rem;
 }
 
-.buttons-in-edit {
-  position: absolute;
-  text-align: center;
-  border: solid;
-  width: 1px;
-  align-self: center;
-}
-
 .row-in-edit {
   position: absolute;
   display: flex;
   flex-wrap: wrap;
-  top: 12rem
+  top: 12rem;
 }
 
+.save-button {
+  position: relative;
+  width: 100px;
+  border: solid 3px #23575a;
+  border-radius: 5px;
+  padding: 0.3rem 0.5rem;
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: #23575a;
+  cursor: pointer;
+  margin-top: 1.5rem;
+}
+.cancel-button {
+  position: relative;
+  width: 100px;
+  margin-left: 30rem;
+  margin-right: 0.5rem;
+  background-color: #c64d2e;
+  cursor: pointer;
+  border: solid 3px #c64d2e;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 17px;
+  color: white;
+  padding: 0.2rem 0.6rem;
+}
+.generate-button {
+  position: relative;
+  width: 300px;
+  font-weight: 500;
+  font-size: 17px;
+  border: solid 3px #4c4c4c;
+  border-radius: 5px;
+  background-color: #4c4c4c;
+  color: white;
+  cursor: pointer;
+  padding: 0.2rem 0.7rem;
+  margin-right: 0.5rem;
+}
+
+.form-entry form {
+  margin-top: 3rem;
+}
 /* Placeholder style */
 
 ::-webkit-input-placeholder {

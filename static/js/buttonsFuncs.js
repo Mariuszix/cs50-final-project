@@ -1,6 +1,7 @@
 // Select the button that generates a random password
 const genButton2 = document.querySelector("#generator2");
-//Listen to the "generate" button and generate random password when clicked.
+
+const oldData = {};
 
 // rowInEdit will keep track so that only 1 row in edit at one time.
 let rowInEdit = false;
@@ -72,6 +73,7 @@ async function deleteOnClick(elm) {
 function cancelOnClick(elm) {
   let row = elm.parentElement.parentElement;
   //In case the cancel is pressed
+  let generatorButton = row.querySelector(".generate-button");
   let name = row.querySelector(".name-search");
   let link = row.querySelector(".link-search");
   let username = row.querySelector(".username-td");
@@ -95,7 +97,7 @@ function cancelOnClick(elm) {
   delButton.classList.remove("is-hidden");
   saveButton.classList.add("is-hidden");
   canButton.classList.add("is-hidden");
-  genButton2.classList.add("is-hidden");
+  generatorButton.classList.add("is-hidden");
   row.classList.remove("row-in-edit");
 
   rowInEdit = false;
@@ -135,7 +137,7 @@ function editOnClick(elm) {
     trToInput(username);
     //password
     trToInput(password);
-    console.log(row);
+
     row.classList.add("row-in-edit");
 
     //Hide edit and delete buttons and show save and cancel
@@ -146,7 +148,6 @@ function editOnClick(elm) {
     genButton.classList.remove("is-hidden");
 
     //Save the old data in the inputs before adding a event listener
-    const oldData = {};
 
     oldData["name"] = name.innerText.trim();
     oldData["link"] = link.innerText.trim();
