@@ -4,15 +4,38 @@
   top: 50%;
   margin-left: -100px;
   padding: 15px;
-  width: 200px;
-  border: 1px solid black;
+  width: 250px;
+  background-color: #4c4c4c;
+  color: white;
+  font-weight: 400;
+  font-size: 17px;
+  text-align: center;
 }
+
 .pw_prompt label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 25px;
+  margin-top: 10px;
 }
 .pw_prompt input {
   margin-bottom: 10px;
+  border-radius: 5px;
+  border-style: hidden;
+  height: 25px;
+  width: 200px;
+}
+.pw_prompt button {
+  position: relative;
+  margin-bottom: 10px;
+  border-style: hidden;
+  border-radius: 5px;
+  padding: 0.3rem 0.5rem;
+  color: #4c4c4c;
+  font-weight: 600;
+  font-size: 13px;
+  background-color: white;
+  cursor: pointer;
+  margin-top: 15px;
 }
 
 .is-hidden {

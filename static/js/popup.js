@@ -5,7 +5,7 @@
 let promptCount = 0;
 window.pw_prompt = function(options) {
     let lm = options.lm || "Password:",
-        bm = options.bm || "Submit";
+        bm = options.bm || "SUBMIT";
     if(!options.callback) { 
         alert("No callback function provided! Please provide one.") 
     };
@@ -24,6 +24,7 @@ window.pw_prompt = function(options) {
     prompt.appendChild(label);
 
     let input = document.createElement("input");
+    input.classList.add("no-outline");
     input.id = "pw_prompt_input" + (promptCount);
     input.type = "password";
     input.addEventListener("keyup", function(e) {

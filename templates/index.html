@@ -45,8 +45,7 @@
       required
     />
     <input
-      class="no-outline"
-      class="in-edit"
+      class="no-outline in-edit"
       id="password"
       autocomplete="off"
       type="text"
@@ -98,10 +97,7 @@
           ><button class="delete-button" onclick="deleteOnClick(this)">
             DELETE
           </button>
-          <div class="buttons-in-edit">
-          <button class="save-button is-hidden" onclick="saveOnlclick(this)">
-            SAVE
-          </button>
+
           <button class="cancel-button is-hidden" onclick="cancelOnClick(this)">
             CANCEL
           </button>
@@ -112,7 +108,9 @@
           >
             GENERATE NEW PASSWORD
           </button>
-        </div>
+          <button class="save-button is-hidden" onclick="saveOnlclick(this)">
+            SAVE
+          </button>
         </td>
       </tr>
       {% endfor %}

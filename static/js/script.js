@@ -1,26 +1,18 @@
 // Select formular
 const formElem = document.querySelector("#formElem");
-
 // Select the button that generates a random password
 const genButton = document.querySelector("#generator");
-
 // Select table
 const table = document.querySelector("#list-entries");
-
 const tableBody = document.querySelector("tbody");
-
 // Select the password field
 const passField = document.querySelector("#password");
-
 //Select the search bar
 const search = document.querySelector("#search-bar");
-
 //Select the new-entry button
 const newEntry = document.querySelector("#add-entry");
-
 //Select submit button
 const submitButton = document.querySelector("#submit");
-
 //Select the edit and delete button
 let edits = document.querySelectorAll(".edit-button");
 
