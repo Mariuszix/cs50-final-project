@@ -1,5 +1,20 @@
 {% extends 'base.html' %} {% block title %} Login {% endblock %} {% block main
 %}
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    
+    {% for message in messages %}
+    <div class="error-bar">
+      <p>{{ message }}</p>
+    </div>
+    {% endfor %}
+    
+  {% endif %}
+{% endwith %}
+
+{{ message }}
+
 <div class="login-sqare">
   <form action="/login" method="post">
     <h1>Welcome Back!</h1>
@@ -10,6 +25,7 @@
         name="username"
         placeholder="Username"
         autocomplete="off"
+        required
       />
     </div>
     <div>
