@@ -52,7 +52,7 @@ if (formElem) {
 
     //Check if the new entry already exist in the DB.
     if (response.status == 409) {
-      alert("The Website or the link exists already in the database!");
+      redAlert("Duplicates not allowed");
     }
 
     //If everything was fine in Flask clear the inputs
@@ -100,7 +100,7 @@ function htmlActivate(elm) {
         changeText();
       } else {
         response = false;
-        alert("Incorrect password");
+        redAlert("Incorrect password");
       }
     },
   });
@@ -163,15 +163,11 @@ function searchFunc() {
   filter = input.value.toLowerCase();
   body = document.querySelector("tbody");
   names = document.querySelectorAll(".name-search");
-  link = document.querySelectorAll(".link-search");
 
   for (i = 0; i < names.length; i++) {
     nameText = names[i].innerHTML;
-    linkText = link[i].innerHTML;
 
     if (nameText.toLowerCase().indexOf(filter) > -1) {
-      names[i].parentElement.style.display = "";
-    } else if (linkText.toLowerCase().indexOf(filter) > -1) {
       names[i].parentElement.style.display = "";
     } else {
       names[i].parentElement.style.display = "none";
