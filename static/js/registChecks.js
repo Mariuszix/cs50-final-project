@@ -1,6 +1,7 @@
 let userName = document.querySelector("#user-reg");
 
 userName.addEventListener("keyup", function () {
+  let signUpButton = document.querySelector("#submit-reg")
   setTimeout(async function () {
     let msgBoxUser = document.querySelector("#user-error");
     let value = userName.value;
@@ -10,8 +11,10 @@ userName.addEventListener("keyup", function () {
     });
     if (response.status == 208) {
       msgBoxUser.innerHTML = `<p class="error-p">Username already registered</p>`;
+      signUpButton.disabled = true;
     } else {
       msgBoxUser.innerHTML = "";
+      signUpButton.disabled = false;
     }
   }, 400);
 });

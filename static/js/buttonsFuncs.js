@@ -1,3 +1,13 @@
+function redAlert(msg) {
+  body = document.querySelector("body")
+  let p = document.createElement("p");
+  let text = document.createTextNode(msg);
+  p.appendChild(text);
+  let div = document.createElement("div");
+  div.classList.add("error-bar");
+  div.appendChild(p);
+  body.appendChild(div);
+}
 // Select the button that generates a random password
 const genButton2 = document.querySelector("#generator2");
 
@@ -41,7 +51,7 @@ async function deleteOnClick(elm) {
   //First prompt the user for confirmation of deletion and password
 
   pw_prompt({
-    lm: "Please enter your password to confirm:",
+    lm: "Please enter your PassApp password to confirm:",
     callback: async function (password) {
       if (rx === password) {
         let row = elm.parentElement.parentElement;
@@ -62,7 +72,7 @@ async function deleteOnClick(elm) {
         }
       } else {
         response = false;
-        alert("Access denied!");
+        redAlert("Incorrect password");
       }
     },
   });
@@ -105,7 +115,7 @@ function cancelOnClick(elm) {
 
 function editOnClick(elm) {
   if (rowInEdit) {
-    alert("You can only edit one entry at a time");
+    redAlert("You can only edit one entry at a time");
     return;
   }
 
@@ -114,7 +124,7 @@ function editOnClick(elm) {
   //Ask fot the password and reveal password
   let passButt = row.querySelector(".reveal-button");
   if (passButt) {
-    alert("You must reveal the password before editing the entry");
+    redAlert("You must reveal the password first before editing the entry");
   } else {
     //Select all the data fields to be changed into inputs.
     let name = row.querySelector(".name-search");
@@ -198,6 +208,6 @@ async function saveOnlclick(elm) {
     console.log("succesfull");
     location.reload();
   } else {
-    alert("Error");
+    redAlert("Database error");
   }
 }
