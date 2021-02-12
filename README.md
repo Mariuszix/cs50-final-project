@@ -17,6 +17,8 @@ All entries are automatically ordered alphabetically, but you can also easily fi
 HTML</br>
 CSS</br>
 JavaScript</br>
+Python (Flask)</br>
+SQL</br>
 
 
 **Homepage**
